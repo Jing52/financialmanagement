@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cxy.springboot.mapper.RegionMapper">
+  <resultMap id="BaseResultMap" type="com.cxy.springboot.entity.Region">
+    <result column="current_level" jdbcType="VARCHAR" property="currentLevel" />
+    <result column="current_name" jdbcType="VARCHAR" property="currentName" />
+    <result column="high_level" jdbcType="VARCHAR" property="highLevel" />
+  </resultMap>
+
+  <sql id="sql_select">
+    current_level,current_name
+  </sql>
+  <sql id="sql_where">
+    <where>
+      high_level = #{area}
+    </where>
+  </sql>
+  <select id="selectAllRegion" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="sql_select"></include>
+    from region
+    <include refid="sql_where"></include>
+  </select>
+</mapper>

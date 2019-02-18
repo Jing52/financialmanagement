@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cxy.springboot.mapper.ConsumeMapper">
+  <resultMap id="BaseResultMap" type="com.cxy.springboot.entity.Consume">
+    <result column="consume_id" jdbcType="INTEGER" property="consumeId" />
+    <result column="consume_type" jdbcType="INTEGER" property="consumeType" />
+    <result column="consume_name" jdbcType="VARCHAR" property="consumeName" />
+    <result column="consume_sum" jdbcType="DECIMAL" property="consumeSum" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="province_id" jdbcType="VARCHAR" property="provinceId" />
+    <result column="city_id" jdbcType="VARCHAR" property="cityId" />
+    <result column="consume_info" jdbcType="VARCHAR" property="consumeInfo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <!-- association字面意思关联，这里只专门做一对一关联； property表示是com.mybatis.bean.StudentTemp中的属性名称；
+            javaType表示该属性是什么类型对象 -->
+    <association property="type" javaType="com.cxy.springboot.entity.ConsumeType">
+      <id column="consume_code" property="consumeCode"/>
+      <result column="type_name" property="typeName"/>
+      <result column="rank_id" property="rankId"/>
+    </association>
+    <association property="region" javaType="com.cxy.springboot.entity.Region">
+      <id column="current_level" property="currentLevel"/>
+      <result column="current_name" property="currentName"/>
+      <result column="high_level" property="highLevel"/>
+    </association>
+  </resultMap>
+  <sql id="sql_count">
+    select count(*)
+  </sql>
+  <sql id="sql_where">
+    <where>
+      <if test="userId != ''">
+        AND a.user_id = #{userId}
+      </if>
+      <if test="consumeType != ''">
+        AND a.consume_type = #{consumeType}
+      </if>
+      <if test="nation != ''">
+        AND a.nation = #{nation}
+      </if>
+      <if test="provinceId != ''">
+        AND a.province_id = #{provinceId}
+      </if>
+      <if test="cityId != ''">
+        AND a.city_id = #{cityId}
+      </if>
+      <if test="startTime != ''">
+        AND a.create_time <![CDATA[>=]]> #{startTime}
+      </if>
+      <if test="endTime != ''">
+        AND a.create_time <![CDATA[<=]]> #{endTime}
+      </if>
+      <if test="minSum != ''">
+        AND a.consume_sum <![CDATA[>=]]> #{minSum}
+      </if>
+      <if test="maxSum != ''">
+        AND a.consume_sum <![CDATA[<=]]> #{maxSum}
+      </if>
+    </where>
+  </sql>
+  <insert id="insert" parameterType="com.cxy.springboot.entity.Consume">
+    insert into financial_consume (consume_id, consume_type, consume_name, 
+      consume_sum, province_id, nation, city_id,
+       consume_info, create_time,
+      user_id)
+    values (#{consumeId,jdbcType=INTEGER}, #{consumeType,jdbcType=INTEGER}, #{consumeName,jdbcType=VARCHAR}, 
+      #{consumeSum,jdbcType=DECIMAL}, #{nation,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, #{cityId,jdbcType=VARCHAR},
+      #{consumeInfo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{userId,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectConsumeWithPage"  parameterType="map" resultMap="BaseResultMap">
+    select a.* ,b.type_name,concat(c.current_name,d.current_name,e.current_name) current_name
+    from financial_consume a,
+    consume_type b,
+    region c,
+    region d,
+    region e
+    <include refid="sql_where"></include>
+    AND a.consume_type = b.consume_code
+    AND a.nation = c.current_level
+    AND a.province_id = d.current_level
+    AND a.city_id = e.current_level
+    order by a.create_time
+  </select>
+  <select id="selectConsumeWithCount"  parameterType="map" resultType="java.lang.Integer">
+    <include refid="sql_count"></include>
+    from financial_consume a
+    <include refid="sql_where"></include>
+  </select>
+  <select id="getMaxSum"  parameterType="map" resultType="java.lang.String">
+    select max(consume_sum)
+    from financial_consume a
+    where user_id = #{userId}
+    AND create_time <![CDATA[<=]]> #{endTime}
+    AND create_time <![CDATA[>=]]> #{startTime}
+  </select>
+  <select id="getMaxDate"  parameterType="map" resultType="java.lang.String">
+    SELECT
+    month(create_time) as month,sum(consume_sum)
+    FROM
+    financial_consume
+    where user_id = #{userId}
+    AND create_time <![CDATA[<=]]> #{endTime}
+    AND create_time <![CDATA[>=]]> #{startTime}
+    GROUP BY month(create_time)
+  </select>
+  <delete id="deleteConsume" parameterType="java.lang.String">
+    delete from financial_consume where consume_id = #{consumeId}
+  </delete>
+</mapper>

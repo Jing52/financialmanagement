@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cxy.springboot.mapper.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.cxy.springboot.entity.UserInfo">
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="weixin" jdbcType="VARCHAR" property="weixin" />
+        <result column="qq" jdbcType="VARCHAR" property="qq" />
+        <result column="msisdn" jdbcType="VARCHAR" property="msisdn" />
+        <result column="user_logo" jdbcType="VARCHAR" property="userLogo" />
+        <result column="is_admin" jdbcType="INTEGER" property="isAdmin" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+    <sql id="sql_count">
+    select count(*)
+    </sql>
+    <sql id="sql_where">
+        <where>
+            <if test="userName != ''">
+                AND user_name like concat('%',#{userName},'%')
+            </if>
+            <if test="msisdn != ''">
+                AND msisdn = #{msisdn}
+            </if>
+            <if test="startTime != ''">
+                AND create_time <![CDATA[>=]]> #{startTime}
+            </if>
+            <if test="endTime != ''">
+                AND create_time <![CDATA[<=]]> #{endTime}
+            </if>
+            <if test="isAdmin != ''">
+                AND is_admin = #{isAdmin}
+            </if>
+        </where>
+    </sql>
+    <insert id="insert" parameterType="com.cxy.springboot.entity.UserInfo">
+    insert into financial_user (user_id, user_name, password,
+      weixin, qq, msisdn,
+      user_logo, is_admin, create_time)
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{weixin,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{msisdn,jdbcType=VARCHAR},
+      #{userLogo,jdbcType=VARCHAR}, #{isAdmin,jdbcType=INTEGER}, now())
+    </insert>
+    <select id="selectUserInfoByCondition"  parameterType="map" resultMap="BaseResultMap">
+        select *
+        from financial_user
+        where user_id=#{userId}
+        and password=#{password}
+    </select>
+    <select id="selectUserInfoWithPage"  parameterType="map" resultMap="BaseResultMap">
+        select *
+        from financial_user
+        <include refid="sql_where"></include>
+        order by create_time
+    </select>
+    <select id="selectUserInfoWithCount"  parameterType="map" resultType="java.lang.Integer">
+        <include refid="sql_count"></include>
+        from financial_user
+        <include refid="sql_where"></include>
+    </select>
+    <delete id="deleteUserInfoByUserId"   parameterType="java.lang.String">
+        delete from financial_user where user_id = #{userId}
+    </delete>
+</mapper>

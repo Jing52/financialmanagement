@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <title>添加用户</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/js/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/js/easyui/themes/icon.css}">
+    <script th:src="@{/static/js/encryption/md5.js}"></script>
+    <style type="text/css">
+        .easyui-textbox,.easyui-combobox{
+            width:200px;
+        }
+        tr{
+            width:1200px;
+        }
+        .title{
+            width:10%;
+        }
+        .table tr td{
+            border:1px red solid;
+            margin:0px;
+        }
+        h3{
+            background:#edf4ff;
+            width:80%
+        }
+    </style>
+</head>
+<body>
+<div class="easyui-panel" style="width:100%;border:0;">
+    <div style="padding:10px 60px 20px 60px">
+        <form id="ff" method="post"style="padding-left:50px">
+            <table id="dataTable" class="easyui-datagrid" style="width:90%;height:auto"
+                   data-options="title:'用户基础信息'"></table>
+            <table cellpadding="5">
+                <tr>
+                    <td class="title"><span style="color:red">*</span>姓名：</td>
+                    <td><input id="userName" class="easyui-textbox" type="text"/></td>
+                    <td class="title"><span style="color:red">*</span>密码：</td>
+                    <td><input id="password" class="easyui-textbox" type="text"/></td>
+                </tr>
+                <tr>
+                    <td class="title"><span style="color:red">*</span>手机号码：</td>
+                    <td><input id="msisdn" class="easyui-textbox" type="text"/></td>
+                    <td class="title"><span style="color:red">*</span>权限：</td>
+                    <td>
+                        <select id="isAdmin" class="easyui-combobox" panelHeight="auto">
+                            <option value="1">普通用户</option>
+                            <option value="0">管理员</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">微信：</td>
+                    <td><input id="weixin" class="easyui-textbox" type="text"/></td>
+                    <td class="title">QQ：</td>
+                    <td><input id="qq" class="easyui-textbox" type="text"/></td>
+                </tr>
+                <tr>
+                    <td class="title">用户头像：</td>
+                    <td><input id="userLogo" class="easyui-textbox" type="text"/></td>
+                </tr>
+            </table>
+        </form>
+        <div style="text-align:center;padding:5px;width:700px;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">清空</a>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' th:src="@{/static/js/easyui/jquery.min.js}" charset="utf-8"></script>
+<script type='text/javascript' th:src="@{/static/js/easyui/jquery.easyui.min.js}" charset="utf-8"></script>
+<script type='text/javascript' th:src="@{/static/js/easyui/locale/easyui-lang-zh_CN.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/static/js/info/info_add.js}"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <title>登录-记账平台</title>
+    <!-- 引入 Bootstrap -->
+    <link th:href="@{/static/js/bootstrap-3.3.6/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/static/css/login/login.css}" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <!--<script th:src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+    <!--<script th:src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>-->
+    <![endif]-->
+    <script th:src="@{/static/js/jquery-2.0.0.min.js}"></script>
+    <script th:src="@{/static/js/bootstrap-3.3.6/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/js/encryption/md5.js}"></script>
+</head>
+<body style="background:#fff">
+<div>
+    <div class="login-header"style="position:absolute;top:0;background:#fff;color:#6691d7;height:4rem;width:100%;">
+        <div class="col-12">
+            <p style="line-height:4rem;padding-left:150px;">记账平台</p>
+        </div>
+    </div>
+</div>
+
+<div class="screenbg">
+    <ul>
+        <li><a href="javascript:;"><img th:src="@{/static/img/background.png}"></a></li>
+    </ul>
+</div>
+<div class="" style="position:absolute;top:100px;height:450px;width:100%;")>
+    <div class="login-box"style="">
+        <div class="login-content ">
+            <div class="login-title text-center">
+                <h1><small class="safe-ico">安全登录</small></h1>
+            </div>
+            <div class="form">
+                <div class="form-group">
+                    <div class="col-xs-12  ">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                            <input type="text" id="userName" name="username" class="form-control" style="" placeholder="请输入账号">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12  ">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-actions">
+                    <button id="loginBtn" type="submit" class="btn btn-sm">登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class=""style="background:#fff;text-align:center;bottom:0;position:absolute;width:100%;height:7rem">
+    <p style="text-align:center;color:#6691d7;margin-top:20px;">Copyright @2019 Null指针</p>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:200px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel" style="color:#000;">登陆失败！</h4>
+            </div>
+            <div class="modal-body" style="margin:0 auto;text-align:center;line-height:50px;color:#000;font-size:17px;">账号或密码错误！</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/static/js/login/login.js}"> </script>
+</html>

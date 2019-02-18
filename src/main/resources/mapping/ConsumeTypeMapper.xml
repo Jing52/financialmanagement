@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cxy.springboot.mapper.ConsumeTypeMapper">
+  <resultMap id="BaseResultMap" type="com.cxy.springboot.entity.ConsumeType">
+    <result column="rank_id" jdbcType="INTEGER" property="rankId" />
+    <result column="consume_code" jdbcType="INTEGER" property="consumeCode" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+  </resultMap>
+
+  <select id="selectAllType" resultMap="BaseResultMap">
+    select * from consume_type
+  </select>
+</mapper>

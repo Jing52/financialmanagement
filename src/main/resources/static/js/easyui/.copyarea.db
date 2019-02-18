@@ -1,0 +1,12 @@
+ClearCase CopyAreaDB|4
+home\vobs\NG1_CODE\WebCode\UPA\wwwRoot\framework\js\easyui
+2
+8
+6:locale|2|0|0|0|e93b88b4c1c211e2a82e0002f727b24c|0
+6:themes|2|0|0|0|04eb82cec1c211e2982e0002f727b24c|0
+16:datagrid-detailview.js|1|13f5676ea19|28b3|8881728c|bbeb8786c1c211e2a8240002f727b24c|0
+b:validate.js|1|13f5676ebe1|a16|d9521c36|34eb981ec1c511e2a8150002f727b24c|0
+13:jquery-1.8.0.min.js|1|13f5676ebb2|1d86a|ab708975|839b8cc0c1c311e2981b0002f727b24c|0
+14:jquery.easyui.min.js|1|13f5676eb08|48757|4833d4af|737b8c50c1c311e290300002f727b24c|0
+7:plugins|2|0|0|0|6b2b8c18c1c311e284220002f727b24c|0
+d:easyloader.js|1|13f5676ea3a|1897|a356733a|e63b889ec1c211e2981a0002f727b24c|0

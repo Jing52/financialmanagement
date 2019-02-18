@@ -1,0 +1,549 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <title>能力概览</title>
+    <!--<link rel="shortcut icon" th:href="/favicon.ico">-->
+    <!--<link th:href="@{/static/hplus/css/bootstrap.min14ed.css}" rel="stylesheet">-->
+    <!--<link th:href="@{/static/hplus/css/font-awesome.min93e3.css}" rel="stylesheet">-->
+    <!--<link th:href="@{/static/hplus/css/animate.min.css}" rel="stylesheet">-->
+    <!--<link th:href="@{/static/hplus/css/style.min.css}" rel="stylesheet">-->
+
+    <!--&lt;!&ndash; jqgrid&ndash;&gt;-->
+    <!--<link th:href="@{/static/hplus/css/plugins/jqgrid/ui.jqgridffe4.css}" rel="stylesheet">-->
+
+
+
+    <style type="text/css">
+
+        .col-sm-2{
+            width:20%;
+        }
+        .index-ibox-content{
+            height:100px
+        }
+        .index-div-left{
+            width:70px;
+            float:left;
+        }
+        .index-div-img{
+            width:45px;
+            height:40px;
+        }
+        .index-div-right{
+            float:left;
+            text-align:center
+        }
+        .index-ibox-title{
+            padding:9px 10px 1px;
+            min-height:40px;
+            background-color:#f5f5f5 !important;
+            border-width:0px;
+        }
+        .index-ibox{
+            margin:5px;
+        }
+
+
+        .index-content-div-img{
+            width:64px;
+            height:69px;
+        }
+        .index-content-m-b-md{
+            margin-top:15px;
+            margin-bottom:5px;
+        }
+        .index-content-div-right{
+            float:left;
+        }
+        .index-content-text{
+            text-overflow: ellipsis; -o-text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: pre;
+            display: inline-block;
+            width: 250px;
+        }
+        .ui-jqgrid-hbox{
+            padding-right:0 !important;
+        }
+        .ui-jqgrid-htable{
+            width:100% !important
+        }
+        #table_list_1,#table_list_2,#table_list_3,#table_list_4,#table_list_5{
+            width:100% !important
+        }
+        th{
+            text-align:center
+        }
+
+        .index-div-img{
+            margin-top:10px
+        }
+        .m-b-md{
+            margin-bottom:15px
+        }
+        .text-navy{
+            color:#676a6c;
+        }
+        h1{
+            margin-top:0;
+            margin-bottom:0
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight" style="padding:10px;">
+    <div class="row">
+        <div class="ibox float-e-margins index-ibox">
+            <div class="ibox-title index-ibox-title">
+                <h5>您的位置：能力目录管理 -> 能力概览</h5>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content index-ibox-content">
+                    <div class="index-div-left">
+                        <img class="index-div-img" th:src="@{/static/css/img/u66.png}" />
+                    </div>
+                    <div class="index-div-right">
+                        <h3 class="m-b-md">数据总数</h3>
+                        <h2 id="dataTotal" class="text-navy"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content index-ibox-content">
+                    <div class="index-div-left">
+                        <img class="index-div-img" th:src="@{/static/css/img/u76.png}" />
+                    </div>
+                    <div class="index-div-right">
+                        <h3 class="m-b-md">标签总数</h3>
+                        <h2 id="labelTotal" class="text-navy"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content index-ibox-content">
+                    <div class="index-div-left">
+                        <img class="index-div-img" th:src="@{/static/css/img/u85.png}" />
+                    </div>
+                    <div class="index-div-right">
+                        <h3 class="m-b-md">模型总数</h3>
+                        <h2 id="modelTotal" class="text-navy"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content index-ibox-content">
+                    <div class="index-div-left">
+                        <img class="index-div-img" th:src="@{/static/css/img/u95.png}" />
+                    </div>
+                    <div class="index-div-right">
+                        <h3 class="m-b-md">接口总数</h3>
+                        <h2 id="openapiTotal" class="text-navy"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="ibox">
+                <div class="ibox-content index-ibox-content">
+                    <div class="index-div-left" id="table_count">
+                        <img class="index-div-img" th:src="@{/static/css/img/u105.png}" />
+                    </div>
+                    <div class="index-div-right">
+                        <h3 class="m-b-md">报告总数</h3>
+                        <h2 id="reportTotal" class="text-navy"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel blank-panel">
+            <div class="panel-heading">
+                <div class="panel-title m-b-md">
+                    <h1>六大应用能力</h1>
+                </div>
+                <div class="panel-options">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#tab-1">位置能力</a>
+                        </li>
+                        <li class=""><a data-toggle="tab" href="#tab-2">标签能力</a>
+                        </li>
+                        <li class=""><a data-toggle="tab" href="#tab-3">营销能力</a>
+                        </li>
+                        <li class=""><a data-toggle="tab" href="#tab-4">互联网内容挖掘能力</a>
+                        </li>
+                        <li class=""><a data-toggle="tab" href="#tab-5">对外开放接口能力</a>
+                        </li>
+                        <li class=""><a data-toggle="tab" href="#tab-6">大数据分析能力</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div style="overflow:hidden;">
+                            <div class="col-sm-5"style="float:left">
+                                <img class="" th:src="@{/static/css/img/u101.png}" style="width:380px;height:210px;"/>
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;">
+                                <h2>全天候持续动态获取终端位置</h2>
+                                <p style="margin:20px 0;">支持行政区域、旅游景点、比赛场馆、商圈等22类1500个具体场景下的用户获取分析及人流量统计，涵盖毫秒级用户轨迹，小时、天、周、月等粒度的用户位置统计，每天超5000万条记录，沉淀OD、车流等多种位置识别模型，对交通、安防、大型活动分析策划等方面均有成熟应用。</p>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>用户位置轨迹</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>城市热力图</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>特殊场景人流预警</span></div>
+                            </div>
+                        </div>
+                        <div style="margin-left:50px">
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u102.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">交通出行</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">与市交通局合作的“智能交通实时路况”，根据用户位置数据，分析各交通枢纽客流承载情况，助力交通疏导决策。</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u103.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">公共安全</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">与金湾政法委合作的“珠海航展大数据支撑平台”，实现实时统计场景人流总量，依据不同容量阈值进行人流预警，助力公共安全保障。</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u104.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">旅游服务</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">根据用户轨迹、行为习惯为用户推荐本地旅行路线，同时为景点运营提供指导。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-2" class="tab-pane">
+                        <div style="overflow:hidden;">
+                            <div class="col-sm-5"style="float:left">
+                                <img class="" th:src="@{/static/css/img/u201.png}" style="width:380px;height:210px;"/>
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;">
+                                <h2>多维度构建用户标签全视图</h2>
+                                <p style="margin:20px 0;">基于用户基础属性、业务使用、上网行为、位置轨迹等信令数据，识别用户特征及偏好，形成优质规则超过3.2万条，同时具备互联网关键字搜索及页面浏览内容解析的深度识别能力，形成了全方位立体化的客户标签体系，现已形成331类标签，覆盖上亿人群，支撑行业客户的服务营销、运营决策。</p>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>用户画像标签</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>内容识别标签</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>营销规则标签</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>位置轨迹标签</span></div>
+                            </div>
+                        </div>
+                        <div style="margin-left:50px">
+                            <div class="col-sm-6">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u202.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">服务营销</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal;width:400px;">利用客户标签，识别行业客户服务或营销的目标对象群体，判断目标群体的渠道偏好，提供精准的营销活动宣传或服务告知。如“果粉”“有车一族”“家有儿女”等。</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u203.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">决策支撑</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal;width:400px;">利用客户标签，提供目标客户群体的信用、资质、偏好等多方面评估，支撑行业客户管理决策。如金融行业征信应用的“十年不换号”、“经常浏览不良网站”等。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-3" class="tab-pane">
+                        <div style="overflow:hidden;">
+                            <div class="col-sm-5"style="float:left">
+                                <img class="" th:src="@{/static/css/img/u301.png}" style="width:380px;height:210px;"/>
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;">
+                                <h2>高效低成本实现场景化的精确营销</h2>
+                                <p style="margin:20px 0;">基于用户标签，面向具体目标客户群，结合实际营销场景，匹配营销规则和渠道，支撑行业客户的营销活动策划、执行、评估。目前已完成数十个行业标签，面向旅游、电商、金融等行业，实现B-B-C的营销能力宣传及支撑。</p>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>目标群体筛选</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>营销时机判断</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>营销渠道匹配</span></div>
+                            </div>
+                        </div>
+                        <div style="margin-left:50px">
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u302.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">电商潜客挖掘</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">利用移动网分系统，通过用户搜索行为以及通话记录等，挖掘潜在客户。如生鲜电商潜在客户挖掘。</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u303.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">商品精准促销</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">基于大数据+移动互联网能力，依托移动行业标签，对行业客户的产商品进行精准营销。如保险行业，依托移动‘保险行业标签’，对小额报销产品进行精准营销。</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u304.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">微信公号扩粉</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">利用大数据筛选目标客户，通过微信公众号进行精准营销。如泰锋电器微信公众号应用，营销效果提升10倍，营销成本仅为传统媒介的5%。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-4" class="tab-pane">
+                        <div style="overflow:hidden;">
+                            <div class="col-sm-5"style="float:left">
+                                <img class="" th:src="@{/static/css/img/u401.png}" style="width:380px;height:210px;"/>
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;">
+                                <h2>深度识别和挖掘用户互联网使用行为</h2>
+                                <p style="margin:20px 0;">基于HADOOP打造分布式移动互联网内容挖掘分析平台，通过搜索关键字分析、访问内容识别、访问行为分析等技术，深度挖掘用户特征及偏好。每小时处理数据超过2亿条，最长储存周期3年，覆盖全省移动用户超1亿，总体抓取识别超过70%的互联网内容信息，识别超万款APP。</p>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>APP识别</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>网站识别</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>关键字识别</span></div>
+                            </div>
+                        </div>
+                        <div style="margin-left:50px">
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u402.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">APP推广</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">基于APP存量用户，挖掘其共性，筛选出APP推广目标客户，并利用公众号等移动互联网渠道进行推广。</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u403.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">终端销售</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">通过电商网站终端销售页面用户访问信息挖掘分析，结合用户自身终端信息、消费水平等数据，识别用户终端偏好及换机时机，定位手机终端销售目标客户。</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u404.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">广告投放</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">依据用户在网站、app上的搜索关键字、访问内容等信息，识别用户兴趣及偏好，定点精准投放广告。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-5" class="tab-pane">
+                        <div style="overflow:hidden;">
+                            <div class="col-sm-5"style="float:left">
+                                <img class="" th:src="@{/static/css/img/u501.png}" style="width:380px;height:210px;"/>
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;">
+                                <h2>数据共享，互利共赢</h2>
+                                <p style="margin:20px 0;">通过HTTP/FTP等接口方式，以15分钟、小时、天、月等不同周期数据粒度，提供对外数据输出的能力，支撑行业客户应用，实现数据需求接收到输出1天完成，同时支持外部数据接入与共享，实现大数据应用的互利共赢，共创良好生态。</p>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>HTTP数据输出</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>FTP数据文件输出</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>接口界面查询</span></div>
+                            </div>
+                        </div>
+                        <div style="margin-left:50px">
+                            <div class="col-sm-6">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u502.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">金湾大数据展示平台</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal;width:400px;">基于用户位置、客户标签等信息，通过FTP的接口方式，与金湾区政府合作，实现了金湾区域的人流监控与预警。</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u503.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">智慧旅游</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal;width:400px;">基于移动大数据能力，通过FTP和HTTP接口的方式，面向珠海市旅游局输出数据，实现景区人流监控、游客路线指引等应用。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-6" class="tab-pane">
+                        <div style="overflow:hidden;">
+                            <div class="col-sm-5"style="float:left">
+                                <img class="" th:src="@{/static/css/img/u601.png}" style="width:380px;height:210px;"/>
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;">
+                                <h2>多层次有深度的专业分析咨询</h2>
+                                <p style="margin:20px 0;">基于大数据资产，通过规划，以分析报告、解决方案等形式，洞察行业的市场特征，为行业客户了解市场、制定策略提供支撑，同时面向行业客户个性化需求，提供定制化咨询服务。</p>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>分析报告（公益、定制）</span></div>
+                                <div><img th:src="@{/static/css/img/u367.png}" style="width:25px;height:25px"/><span>行业解决方案</span></div>
+                            </div>
+                        </div>
+                        <div style="margin-left:50px">
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u602.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">免费公益分析报告</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">基于移动大数据，围绕具体主题，提供生动详实的分析报告，并在公众号等互联网渠道发布。如《航展高大上，我想去一趟》</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u603.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">专业分析报告</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">针对不同行业领域，从用户基础属性、消费、位置、行为、偏好等多方面深度解析，探索行业的市场特性，提供决策支撑。</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="index-div-left">
+                                    <img class="index-content-div-img" th:src="@{/static/css/img/u604.png}" style="margin-top:15px"/>
+                                </div>
+                                <div class="index-content-div-right">
+                                    <h4 class="m-b-md index-content-m-b-md">公安行业解决方案</h4>
+                                    <span class="text-navy index-content-text"style="white-space:normal">针对政府公安部门管理应用需求，提供定制咨询服务，并输出解决方案。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel blank-panel">
+            <div class="panel-heading">
+                <div class="panel-title m-b-md">
+                    <h1>能力情况分析</h1>
+                </div>
+                <div class="panel-options">
+                    <ul class="nav nav-tabs">
+                        <li class="tab2 active"><a data-toggle="tab" href="#tab-7"><i class="fa fa-bar-chart"></i>数据</a></li>
+                        <li class="tab2"><a data-toggle="tab" href="#tab-8"><i class="fa fa-tags"></i>标签</a></li>
+                        <li class="tab2"><a data-toggle="tab" href="#tab-9"><img th:src="@{/static/css/img/u389.png}"style="width:15px;height:13px"/>模型</a></li>
+                        <li class="tab2"><a data-toggle="tab" href="#tab-10"><i class="fa fa-sliders"></i>接口</a></li>
+                        <li class="tab2"><a data-toggle="tab" href="#tab-11"><img th:src="@{/static/css/img/u395.png}"style="width:15px;height:13px"/>报告</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div id="tab-7" class="tab-pane active">
+                        <div style="overflow:hidden;">
+                            <div id="analysis-1" class="col-sm-5"style="float:left;height:300px;">
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;">
+                                <h4>浏览热度TOP5数据</h4>
+                                <div class="jqGrid_wrapper">
+                                    <table id="table_list_1"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-8" class="tab-pane">
+                        <div style="">
+                            <div id="analysis-2" class="col-sm-5"style="float:left;height:300px;">
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;width:58%">
+                                <h4>浏览热度TOP5标签</h4>
+                                <div class="jqGrid_wrapper">
+                                    <table id="table_list_2"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-9" class="tab-pane">
+                        <div style="">
+                            <div id="analysis-3" class="col-sm-5"style="float:left;height:300px;">
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;width:58%">
+                                <h4>浏览热度TOP5模型</h4>
+                                <div class="jqGrid_wrapper">
+                                    <table id="table_list_3"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-10" class="tab-pane">
+                        <div style="">
+                            <div id="analysis-4" class="col-sm-5"style="float:left;height:300px;">
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;width:58%">
+                                <h4>浏览热度TOP5接口</h4>
+                                <div class="jqGrid_wrapper">
+                                    <table id="table_list_4"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-11" class="tab-pane">
+                        <div style="">
+                            <div id="analysis-5" class="col-sm-5"style="float:left;height:300px;">
+                            </div>
+                            <div class="col-sm-7" style="padding:10px 10px 10px 10px;width:58%">
+                                <h4>浏览热度TOP5报告</h4>
+                                <div class="jqGrid_wrapper">
+                                    <table id="table_list_5"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel blank-panel">
+            <div class="panel-heading">
+                <div class="panel-title m-b-md">
+                    <h1>能力浏览指数（最近7天）</h1>
+                </div>
+                <div class="panel-options">
+                    <div id="chart" style="height:300px;border:1px #ccc solid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--<script th:src="@{/static/hplus/css/hplus/js/jquery.min.js}"></script>-->
+<!--<script th:src="@{/static/hplus/css/hplus/js/bootstrap.min.js}"></script>-->
+<!--<script th:src="@{/static/hplus/css/hplus/js/plugins/sparkline/jquery.sparkline.min.js}"></script>-->
+<!--<script th:src="@{/static/hplus/css/hplus/js/plugins/peity/jquery.peity.min.js}"></script>-->
+<!--<script th:src="@{/static/js/hplus/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js}"></script>-->
+<!--<script th:src="@{/static/js/hplus/js/plugins/jqgrid/jquery.jqGrid.minffe4.js}"></script>-->
+<!--<script th:src="@{/static/hplus/css/hplus/js/content.min.js}"></script>-->
+<!--<script th:src="@{/static/hplus/css/hplus/js/demo/peity-demo.min.js}"></script>-->
+<!--<script th:src="@{/static/hplus/css/echarts/echarts.common.min.js}"></script>-->
+</body>
+</html>

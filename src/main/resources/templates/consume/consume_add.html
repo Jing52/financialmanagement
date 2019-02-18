@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <title>添加消费记录</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/js/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/js/easyui/themes/icon.css}">
+    <style type="text/css">
+        .easyui-textbox,.easyui-combobox{
+            width:150px;
+        }
+        .easyui-area-combobox{
+            width:100px;
+        }
+        tr{
+            width:1200px;
+        }
+        .title{
+            width:40px;
+        }
+        .txt{
+            width:30px;
+        }
+        .table tr td{
+            border:1px red solid;
+            margin:0px;
+        }
+        h3{
+            background:#edf4ff;
+            width:80%
+        }
+    </style>
+</head>
+<body>
+<div class="easyui-panel" style="width:100%;border:0;">
+    <div style="padding:10px 60px 20px 60px">
+        <form id="ff" method="post"style="padding-left:50px">
+            <table id="dataTable" class="easyui-datagrid" style="width:90%;height:auto"
+                   data-options="title:'消费基础信息'"></table>
+            <table cellpadding="5">
+                <tr>
+                    <td class="title"><span style="color:red">*</span>消费类型：</td>
+                    <td>
+                        <input id="consumeType" class="easyui-combobox" panelHeight="auto"/>
+                    </td>
+                    <td class="title"><span style="color:red">*</span>消费名称：</td>
+                    <td><input id="consumeName" class="easyui-textbox" type="text"/></td>
+                </tr>
+                <tr>
+                    <td class="txt"><span style="color:red">*</span>国家：</td>
+                    <td>
+                        <input id="nation" class="easyui-area-combobox" panelHeight="auto"/>
+                    </td>
+                    <td class="txt"><span style="color:red">*</span>省份：</td>
+                    <td>
+                        <input id="provinceId" class="easyui-area-combobox" panelHeight="auto"/>
+                    </td>
+                    <td class="txt"><span style="color:red">*</span>地市：</td>
+                    <td>
+                        <input id="cityId" class="easyui-area-combobox" panelHeight="auto"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title"><span style="color:red">*</span>消费金额：</td>
+                    <td><input id="consumeSum" class="easyui-textbox" type="text"/></td>
+                </tr>
+                <tr>
+                    <td class="title">消费详情：</td>
+                    <td><textarea id="consumeInfo" class="easyui-textbox"/></td>
+                </tr>
+            </table>
+        </form>
+        <div style="text-align:center;padding:5px;width:700px;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">清空</a>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' th:src="@{/static/js/easyui/jquery.min.js}" charset="utf-8"></script>
+<script type='text/javascript' th:src="@{/static/js/easyui/jquery.easyui.min.js}" charset="utf-8"></script>
+<script type='text/javascript' th:src="@{/static/js/easyui/locale/easyui-lang-zh_CN.js}" charset="utf-8"></script>
+<!--<script type="text/javascript" th:src="@{/static/js/info/info_add.js}"></script>-->
+</body>
+</html>
